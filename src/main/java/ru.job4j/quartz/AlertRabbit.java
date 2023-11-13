@@ -14,6 +14,7 @@ import static org.quartz.SimpleScheduleBuilder.*;
 public class AlertRabbit {
     public static void main(String[] args) {
         Properties properties = getProperties();
+        Integer iterval = Integer.parseInt(properties.getProperty("rabbit.interval"));
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
@@ -35,6 +36,7 @@ public class AlertRabbit {
         Properties properties = new Properties();
         try (InputStream in = AlertRabbit.class.getClassLoader()
                 .getResourceAsStream("resources/rabbit.properties")) {
+            properties.load(in);
         } catch (IOException e) {
             e.printStackTrace();
         }
