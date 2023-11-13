@@ -14,13 +14,13 @@ import static org.quartz.SimpleScheduleBuilder.*;
 public class AlertRabbit {
     public static void main(String[] args) {
         Properties properties = getProperties();
-        Integer iterval = Integer.parseInt(properties.getProperty("rabbit.interval"));
+        int iterval = Integer.parseInt(properties.getProperty("rabbit.interval"));
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
             JobDetail job = newJob(Rabbit.class).build();
             SimpleScheduleBuilder times = simpleSchedule()
-                    .withIntervalInSeconds(10)
+                    .withIntervalInSeconds(iterval)
                     .repeatForever();
             Trigger trigger = newTrigger()
                     .startNow()
