@@ -28,4 +28,11 @@ public class HabrCareerParse {
             });
         }
     }
+
+    private String retrieveDescription(String link) throws IOException {
+        Connection connection = Jsoup.connect(link);
+        Document document = connection.get();
+        Element element = document.select(".page-section").first();
+        return element.text();
+    }
 }
