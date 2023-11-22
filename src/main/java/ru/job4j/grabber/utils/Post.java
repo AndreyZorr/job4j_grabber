@@ -26,19 +26,19 @@ public class Post {
         if (!(o instanceof Post post)) {
             return false;
         }
-        return id == post.id && Objects.equals(description, post.description);
+        return id == post.id && Objects.equals(link, post.link);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description);
+        return Objects.hash(id, link);
     }
 
     @Override
     public String toString() {
         return "Post{"
                 + "id=" + id
-                + ", description='" + description + '\''
+                + ", link='" + link + '\''
                 + '}';
     }
 }
