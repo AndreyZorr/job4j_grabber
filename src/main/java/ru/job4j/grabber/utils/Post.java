@@ -20,8 +20,12 @@ public class Post {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Post post)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Post post)) {
+            return false;
+        }
         return id == post.id && Objects.equals(description, post.description);
     }
 
@@ -32,12 +36,9 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                '}';
+        return "Post{"
+                + "id=" + id
+                + ", description='" + description + '\''
+                + '}';
     }
 }
