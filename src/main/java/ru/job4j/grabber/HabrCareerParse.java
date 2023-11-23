@@ -15,12 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HabrCareerParse implements Parse {
+
     private static int id = 0;
-
     private final DateTimeParser dateTimeParser;
-
     private static final String SOURCE_LINK = "https://career.habr.com";
-
     public HabrCareerParse(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
     }
@@ -29,13 +27,6 @@ public class HabrCareerParse implements Parse {
         HabrCareerParse hcp = new HabrCareerParse(new HabrCareerDateTimeParser());
         List<Post> postList = hcp.list(String.format("%s/vacancies/java_developer?page=", SOURCE_LINK));
         postList.forEach(System.out::println);
-    }
-
-    private String retrieveDescription(String link) throws IOException {
-        Connection connection = Jsoup.connect(link);
-        Document document = connection.get();
-        Element element = document.select(".page-section").first();
-        return element.text();
     }
 
     @Override
@@ -72,5 +63,12 @@ public class HabrCareerParse implements Parse {
             throw new RuntimeException(e);
         }
         return new Post(id, vacancyName, link, description, localDateTime);
+    }
+
+    private String retrieveDescription(String link) throws IOException {
+        Connection connection = Jsoup.connect(link);
+        Document document = connection.get();
+        Element element = document.select(".page-section").first();
+        return element.text();
     }
 }
