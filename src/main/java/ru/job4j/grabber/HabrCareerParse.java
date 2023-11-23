@@ -17,8 +17,11 @@ import java.util.List;
 public class HabrCareerParse implements Parse {
 
     private static int id = 0;
+
     private final DateTimeParser dateTimeParser;
+
     private static final String SOURCE_LINK = "https://career.habr.com";
+
     public HabrCareerParse(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
     }
