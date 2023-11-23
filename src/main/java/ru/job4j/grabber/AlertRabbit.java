@@ -1,8 +1,7 @@
-package ru.job4j.quartz;
+package ru.job4j.grabber;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import static java.lang.System.getProperties;
 import static org.quartz.JobBuilder.*;
 import static org.quartz.TriggerBuilder.*;
