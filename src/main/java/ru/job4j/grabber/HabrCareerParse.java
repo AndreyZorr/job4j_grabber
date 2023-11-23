@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HabrCareerParse implements Parse {
-    private static final String SOURCE_LINK = "https://career.habr.com";
-
     private static int id = 0;
 
     private final DateTimeParser dateTimeParser;
+
+    private static final String SOURCE_LINK = "https://career.habr.com";
 
     public HabrCareerParse(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
@@ -57,21 +57,20 @@ public class HabrCareerParse implements Parse {
     }
 
     private Post post(Element element) {
-        HabrCareerParse hcp = new HabrCareerParse(new HabrCareerDateTimeParser());
         Element titleElement = element.select(".vacancy-card__title").first();
+        String vacancyName = titleElement.text();
         Element linkElement = titleElement.child(0);
+        String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
         Element dateElement = element.select(".vacancy-card__date").first();
         Element date = dateElement.child(0);
-        LocalDateTime dateTime = hcp.dateTimeParser.parse(date.attr("datetime"));
-        String vacancyName = titleElement.text();
-        String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
+        HabrCareerParse hcp = new HabrCareerParse(new HabrCareerDateTimeParser());
+        LocalDateTime localDateTime = hcp.dateTimeParser.parse(date.attr("datetime"));
         String description;
         try {
-             description = hcp.retrieveDescription(link);
+            description = hcp.retrieveDescription(link);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new Post(id, vacancyName, link, description);
+        return new Post(id, vacancyName, link, description, localDateTime);
     }
-
 }
