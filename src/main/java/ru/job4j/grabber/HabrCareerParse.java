@@ -5,11 +5,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 
 public class HabrCareerParse {
-
     private static final String SOURCE_LINK = "https://career.habr.com";
     public static final String LINK = String.format("%s/vacancies/java_developer?page=", SOURCE_LINK);
 
@@ -28,5 +26,12 @@ public class HabrCareerParse {
                 System.out.printf("%s  %s %n%s", vacancyName, link, data);
             });
         }
+    }
+
+    private String retrieveDescription(String link) throws IOException {
+        Connection connection = Jsoup.connect(link);
+        Document document = connection.get();
+        Element element = document.select(".page-section").first();
+        return element.text();
     }
 }
