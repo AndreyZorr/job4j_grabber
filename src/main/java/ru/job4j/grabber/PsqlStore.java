@@ -42,7 +42,6 @@ public class PsqlStore implements Store {
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-
     }
 
     @Override
@@ -51,8 +50,8 @@ public class PsqlStore implements Store {
                 "INSERT INTO post(name, text, link, created) VALUES (?, ?, ?, ?) ON CONFLICT (link) DO NOTHING",
                 Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, post.getTitle());
-            ps.setString(2, post.getLink());
-            ps.setString(3, post.getDescription());
+            ps.setString(2, post.getDescription());
+            ps.setString(3, post.getLink());
             ps.setTimestamp(4, Timestamp.valueOf(post.getCreated()));
             ps.executeUpdate();
             try (ResultSet resultSet = ps.getGeneratedKeys()) {
