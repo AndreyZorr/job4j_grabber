@@ -20,12 +20,6 @@ public class HabrCareerParse implements Parse {
         this.dateTimeParser = dateTimeParser;
     }
 
-    public static void main(String[] args) {
-        HabrCareerParse hcp = new HabrCareerParse(new HabrCareerDateTimeParser());
-        List<Post> postList = hcp.list(String.format("%s/vacancies/java_developer?page=", SOURCE_LINK));
-        postList.forEach(System.out::println);
-    }
-
     private String retrieveDescription(String link) throws IOException {
         Connection connection = Jsoup.connect(link);
         Document document = connection.get();
