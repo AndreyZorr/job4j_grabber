@@ -13,7 +13,6 @@ import java.util.Properties;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
-
 public class Grabber implements Grab {
     private final Parse parse;
     private final Store store;
@@ -80,11 +79,7 @@ public class Grabber implements Grab {
             Store store = (Store) map.get("store");
             Parse parse = (Parse) map.get("parse");
             List<Post> posts;
-            try {
-                posts = parse.list("https://career.habr.com/vacancies/java_developer?page=");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            posts = parse.list("https://career.habr.com/vacancies/java_developer?page=");
             posts.forEach(store::save);
         }
     }
@@ -100,8 +95,8 @@ public class Grabber implements Grab {
         var parse = new HabrCareerParse(new HabrCareerDateTimeParser());
         var store = new PsqlStore(cfg);
         var time = Integer.parseInt(cfg.getProperty("time"));
-        Grabber grab = new Grabber(parse, store, scheduler, time);
-        grab.init();
-        grab.web(store);
+        Grabber grabber = new Grabber(parse, store, scheduler, time);
+        grabber.init();
+        grabber.web(store);
     }
 }
