@@ -9,17 +9,17 @@ public class PsqlStore implements Store {
 
     private Connection cnn;
 
-    public PsqlStore(Properties cfg) throws SQLException {
+    public PsqlStore(Properties cfg) {
         try {
             Class.forName(cfg.getProperty("jdbc.driver"));
+            cnn = DriverManager.getConnection(
+                    cfg.getProperty("url"),
+                    cfg.getProperty("username"),
+                    cfg.getProperty("password")
+            );
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-        cnn = DriverManager.getConnection(
-                cfg.getProperty("url"),
-                cfg.getProperty("username"),
-                cfg.getProperty("password")
-        );
     }
 
     @Override
@@ -45,7 +45,8 @@ public class PsqlStore implements Store {
     @Override
     public List<Post> getAll() {
         List<Post> list = new ArrayList<>();
-        try (PreparedStatement statement = cnn.prepareStatement("SELECT * FROM post")) {
+        try (PreparedStatement statement = cnn.prepareStatement(
+                "SELECT * FROM post")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     list.add(creat(resultSet));
@@ -53,7 +54,6 @@ public class PsqlStore implements Store {
             }
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return list;
     }
