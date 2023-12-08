@@ -79,26 +79,25 @@ public class Grabber implements Grab {
             JobDataMap map = context.getJobDetail().getJobDataMap();
             Store store = (Store) map.get("store");
             Parse parse = (Parse) map.get("parse");
-            List<Post> posts = parse.list("https://career.habr.com/vacancies/java_developer?page=");
-            for (Post post : posts) {
-                store.save(post);
-            }
+            List<Post> posts;
+            posts = parse.list("https://career.habr.com/vacancies/java_developer?page=");
+            posts.forEach(store::save);
         }
+    }
 
-        public static void main(String[] args) throws Exception {
-            var cfg = new Properties();
-            try (InputStream in = Grabber.class.getClassLoader()
-                    .getResourceAsStream("app.properties")) {
-                cfg.load(in);
-            }
-            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-            scheduler.start();
-            var parse = new HabrCareerParse(new HabrCareerDateTimeParser());
-            var store = new PsqlStore(cfg);
-            var time = Integer.parseInt(cfg.getProperty("time"));
-            Grabber grab = new Grabber(parse, store, scheduler, time);
-            grab.init();
-            grab.web(store);
+    public static void main(String[] args) throws Exception {
+        var cfg = new Properties();
+        try (InputStream in = Grabber.class.getClassLoader()
+                .getResourceAsStream("app.properties")) {
+            cfg.load(in);
         }
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        scheduler.start();
+        var parse = new HabrCareerParse(new HabrCareerDateTimeParser());
+        var store = new PsqlStore(cfg);
+        var time = Integer.parseInt(cfg.getProperty("time"));
+        Grabber grab = new Grabber(parse, store, scheduler, time);
+        grab.init();
+        grab.web(store);
     }
 }
