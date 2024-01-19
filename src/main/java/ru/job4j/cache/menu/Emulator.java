@@ -9,6 +9,8 @@ public class Emulator {
     public static final String SPECIFY_DIRECTORY = "Введите кэшируемую директорию";
     public static final int LOAD_CACHE = 1;
     public static final int GET_CACHE = 2;
+    private String dir = "src/main/java/ru/job4j/cache/files/";
+    private String key = "Names.txt";
     public static final String MENU = """
                 Введите 1, указать кэшируемую директорию.
                 Введите 2, загрузить содержимое файла в кэш.
