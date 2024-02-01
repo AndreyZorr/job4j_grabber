@@ -36,7 +36,6 @@ public class Employee {
         return salary;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
