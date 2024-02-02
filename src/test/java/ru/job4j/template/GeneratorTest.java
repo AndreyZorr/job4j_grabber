@@ -20,5 +20,4 @@ class GeneratorTextTest {
         assertThat(generatorText.produce(template, map)).isEqualTo(expected);
 
     }
-
 }
