@@ -1,18 +1,18 @@
 package ru.job4j.lsp.storage;
 
-import java.util.List;
-
 public class Trash extends AbstractStore {
-    private List<Food> product;
+    private Food food;
 
     @Override
-    public void add(Food food) {
-        this.product.add(food);
-
+    public boolean remaining(Food food) {
+        return food.getRemainingTime() == 0;
     }
 
     @Override
-    public List<Food> getProducts() {
-        return product;
+    public String toString() {
+        return "Trash{"
+                + "food=" + food
+                + ", foodList=" + foodList
+                + '}';
     }
 }

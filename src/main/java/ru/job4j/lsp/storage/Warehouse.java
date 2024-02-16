@@ -1,18 +1,21 @@
 package ru.job4j.lsp.storage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 public class Warehouse extends AbstractStore {
-    public List<Food> product = new ArrayList<>();
+    private Food food;
 
     @Override
-    public void add(Food food) {
-        this.product.add(food);
+    public boolean remaining(Food food) {
+        long shelfLife = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
+        return (double) food.getRemainingTime() / shelfLife > 0.75;
     }
 
     @Override
-    public List<Food> getProducts() {
-        return product;
+    public String toString() {
+        return "Warehouse{"
+                + "food=" + food
+                + ", foodList=" + foodList
+                + '}';
     }
 }

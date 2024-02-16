@@ -1,18 +1,19 @@
 package ru.job4j.lsp.storage;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Food {
     private String name;
-     private LocalDateTime expiryData;
-     private LocalDateTime createData;
-     private double price;
-     private int discount;
+    private LocalDate expiryDate;
+    private LocalDate createDate;
+    private double price;
+    private double discount;
+    private long remainingTime;
 
-    public Food(String name, LocalDateTime expiryData, LocalDateTime createData, double price, int discount) {
+    public Food(String name, LocalDate expiryDate, LocalDate createDate, double price, double discount) {
         this.name = name;
-        this.expiryData = expiryData;
-        this.createData = createData;
+        this.expiryDate = expiryDate;
+        this.createDate = createDate;
         this.price = price;
         this.discount = discount;
     }
@@ -25,20 +26,20 @@ public class Food {
         this.name = name;
     }
 
-    public LocalDateTime getExpiryData() {
-        return expiryData;
+    public LocalDate getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setExpiryData(LocalDateTime expiryData) {
-        this.expiryData = expiryData;
+    public void setExpiryDate(LocalDate expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
-    public LocalDateTime getCreateData() {
-        return createData;
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateData(LocalDateTime createData) {
-        this.createData = createData;
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 
     public double getPrice() {
@@ -49,11 +50,31 @@ public class Food {
         this.price = price;
     }
 
-    public int getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public long getRemainingTime() {
+        return remainingTime;
+    }
+
+    public void setRemainingTime(long remainingTime) {
+        this.remainingTime = remainingTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{"
+                + "name='" + name + '\''
+                + ", expiryDate=" + expiryDate
+                + ", createDate=" + createDate
+                + ", price=" + price
+                + ", discount=" + discount
+                + ", remainingTime=" + remainingTime
+                + '}';
     }
 }
