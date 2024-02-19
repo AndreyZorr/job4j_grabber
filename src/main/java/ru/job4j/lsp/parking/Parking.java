@@ -5,7 +5,7 @@ public class Parking {
     private String number;
     private int size;
 
-    public Parking(String number, int size) {
+    public Parking() {
         this.number = number;
         this.size = size;
     }
@@ -32,5 +32,13 @@ public class Parking {
                 + "number='" + number + '\''
                 + ", size=" + size
                 + '}';
+    }
+
+    public boolean getSize(PassengerPlace passengerPlace) {
+        return size == 1;
+    }
+
+    public boolean getSize(CargoPlace cargoPlace) {
+        return size > 1;
     }
 }
