@@ -7,12 +7,4 @@ public class Trash extends AbstractStore {
     public boolean remaining(Food food) {
         return food.getRemainingTime() == 0;
     }
-
-    @Override
-    public String toString() {
-        return "Trash{"
-                + "food=" + food
-                + ", foodList=" + foodList
-                + '}';
-    }
 }

@@ -22,6 +22,15 @@ public abstract class AbstractStore implements Store {
         return true;
     }
 
+    public boolean setPrice(Food food) {
+        boolean rsl = false;
+        if (food.getDiscount() != 0) {
+            food.setPrice(food.getPrice() + (food.getPrice() * food.getDiscount()));
+            rsl = true;
+        }
+        return rsl;
+    }
+
     public List<Food> getFoodList() {
         return foodList;
     }

@@ -23,12 +23,4 @@ public class Shop extends AbstractStore {
         }
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "Shop{"
-                + "food=" + food
-                + ", foodList=" + foodList
-                + '}';
-    }
 }

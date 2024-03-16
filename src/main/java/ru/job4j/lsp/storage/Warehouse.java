@@ -10,12 +10,4 @@ public class Warehouse extends AbstractStore {
         long shelfLife = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
         return (double) food.getRemainingTime() / shelfLife > 0.75;
     }
-
-    @Override
-    public String toString() {
-        return "Warehouse{"
-                + "food=" + food
-                + ", foodList=" + foodList
-                + '}';
-    }
 }

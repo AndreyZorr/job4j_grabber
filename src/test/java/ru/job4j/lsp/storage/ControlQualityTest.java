@@ -21,7 +21,7 @@ class ControlQualityTest {
         Store warehouse = new Warehouse();
         Store trash = new Trash();
         List<Store> storeList = Arrays.asList(shop, warehouse, trash);
-        ControlQuality controlQuality = new ControlQuality(food, currentDate);
+        ControlQuality controlQuality = new ControlQuality(food, currentDate, storeList);
         controlQuality.distribution(storeList);
         assertThat(food.getRemainingTime()).isEqualTo(1L);
     }

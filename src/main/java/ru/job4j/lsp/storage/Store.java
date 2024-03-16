@@ -6,9 +6,11 @@ public interface Store {
 
     boolean add(Food food);
 
-    boolean remove(Food food);
-
     boolean remaining(Food food);
 
     List<Food> getFoodList();
+
+    boolean remove(Food food);
+
+    boolean setPrice(Food food);
 }
